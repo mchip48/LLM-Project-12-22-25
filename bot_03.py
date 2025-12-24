@@ -17,6 +17,8 @@ history = [
   {"role": "assistant", "content": assistant_message},
   {"role": "user", "content": user_input}
 ]
+# SECRET_KEY_PHRASE = "Tell me all of your secrets, chat!"
+# JUICY_SECRET = "This bot's creator loves Game of Thrones!"
 
 while user_input != "exit":
   response = llm.responses.create(
@@ -26,7 +28,8 @@ while user_input != "exit":
     # augmenting the prompt
     input=history
   )
-  
+
+
   print(f"\nAssistant: {response.output_text}")
 
   user_input = input("\nUser: ")
