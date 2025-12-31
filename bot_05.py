@@ -21,7 +21,7 @@ while user_input != "exit":
   results = dense_index.search(
     namespace="flamehamster",
     query={
-      "top_k": 3,
+      "top_k": 1,
       "inputs": {
         'text': user_input
       }
