@@ -2,6 +2,10 @@ import os
 from dotenv import load_dotenv
 from openai import OpenAI
 from pinecone import Pinecone
+from langfuse.openai import OpenAI
+# import pydantic.v1 as pydantic_v1
+
+# import json
 
 load_dotenv()
 llm = OpenAI()
@@ -60,3 +64,7 @@ while user_input != "exit":
   ]
 
   user_input = input("User: ")
+
+  # print("------------------------")
+  # print(json.dumps(history, indent=2))
+  # print("------------------------")
