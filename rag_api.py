@@ -24,11 +24,24 @@ dense_index = pc.Index("llm-project-2")
 conversations = {}
 conversation_chunks = {}  # NEW: Track chunks per conversation - instead of being an empty string - basically, we need to be able to determine what chunk is what and with a string where everything is one blob, that isn't possible so instead, we use a dictionary/hash where we can determine what chunk is what
 
+# What Conversation Chunks will look like:
+# conversation_chunks = {
+#    "default": {
+#        "chunk_id_123": "Documentation text about Flamehamster...",
+#        "chunk_id_456": "Documentation text about Rumblechirp...",
+#    },
+#    "user_abc": {
+#        "chunk_id_789": "Some other documentation...",
+#    }
+# }
+
 class ChatMessage(BaseModel):
    message: str
    conversation_id: str = "default"
 
 # rag("what is GROSS", {})
+# user_input = "It keeps crashing"
+# rag_chunks = "default": {}
 def rag(user_input, rag_chunks):
    """Search Pinecone and ADD chunks to the dictionary"""
    results = dense_index.search(
@@ -92,7 +105,7 @@ def create(chat_message: ChatMessage):
   #    {role: user, content: user_query}
   # }
 
-   # Initialize if new conversation
+   # Initialize if new conversation and conversation chunk
    if conversation_id not in conversations:
        conversations[conversation_id] = [
            system_prompt(),
